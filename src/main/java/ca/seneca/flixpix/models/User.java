@@ -1,5 +1,6 @@
 package ca.seneca.flixpix.models;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,9 @@ import java.util.Collection;
 
 @Document(collection = "users")
 public class User implements UserDetails {
+
+    @Id
+    private String id;
 
     @NotBlank(message = "First name is required")
     private String firstName;
@@ -27,6 +31,14 @@ public class User implements UserDetails {
             regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$",
             message = "Password must contain minimum eight characters, at least one letter, one number and one special character")
     private String password;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
